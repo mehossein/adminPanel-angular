@@ -1,0 +1,11 @@
+@import url("tailwindcss/base");
+@import url("tailwindcss/utilities");
+@import url("tailwindcss/components");
+@import url("./assets/css/style");
+@import url("~ngx-toastr/toastr");
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

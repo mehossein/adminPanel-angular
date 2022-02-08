@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC,SAAS,CAAC,0BAA0B,CAAC;EACzC,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;CACxB;;AAED,AAAA,KAAK,CAAC;EACJ,UAAU,EAAE,iBAAiB;EAC7B,KAAK,EAAE,IAAI;CACZ",
+    "sources": [
+        "../src/app/components/users-table/users-table.component.scss"
+    ],
+    "names": [],
+    "file": "users-table.component.css"
+}

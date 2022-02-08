@@ -1,0 +1,14 @@
+:host ::ng-deep .mat-sort-header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+table {
+  text-align: center !important;
+  width: 100%;
+}
+/*# sourceMappingURL=users-table.component.css.map */

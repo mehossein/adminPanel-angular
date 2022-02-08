@@ -1,0 +1,170 @@
+<div class="w-full h-14 p-2 m-1 border-b border-gray-500 flex justify-between">
+  <div
+    class="w-1/12 bg-teal-300 text-white flex-center rounded-lg px-3 shadow-sm cursor-pointer"
+    (click)="onAddUser()"
+  >
+    جدید
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+      />
+    </svg>
+  </div>
+  <div class="w-2/12 h-full relative">
+    <input
+      #searchInput
+      (keyup)="search(searchInput.value)"
+      type="text"
+      class="w-full h-full rounded pr-8 bg-gray-200"
+      placeholder="جست و جو "
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 absolute right-1 top-2.5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  </div>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+      <td mat-cell *matCellDef="let row">{{ row.id + 1 }}</td>
+    </ng-container>
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>نام کاربری</th>
+      <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthday">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</th>
+      <td mat-cell *matCellDef="let row">{{ row.birthday }}</td>
+    </ng-container>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>جنسیت</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.gender == 1 ? "مرد" : "زن" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="activity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>فعالیت</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="w-full h-full flex-center">
+          <svg
+            *ngIf="row.activity"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <svg
+            *ngIf="!row.activity"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-red-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="province">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>استان</th>
+      <td mat-cell *matCellDef="let row">{{ row.province }}</td>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>شهر</th>
+      <td mat-cell *matCellDef="let row">{{ row.city }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>عملیات</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="w-full h-full flex-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-orange-500 mx-1 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+            />
+          </svg>
+          <svg
+            [matMenuTriggerFor]="menu"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-red-600 mx-1 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+            />
+          </svg>
+          <mat-menu #menu="matMenu" class="p-5 flex-center">
+            مطمئنی می خوای حذف کنی ؟؟
+            <div
+              (click)="deleteUser(row.id)"
+              class="mt-3 p-2 rounded bg-red-300 border border-red-600 text-red-600 cursor-pointer flex-center"
+            >
+              اره حذف بشه
+            </div>
+          </mat-menu>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="8">اطلاعاتی یافت نشد</td>
+    </tr>
+  </table>
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20, 100]"
+  ></mat-paginator>
+</div>

@@ -1,0 +1,18 @@
+﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: IRANSans !important;
+}
+
+body,
+html {
+  font-weight: 300;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,10 @@
+<p style="text-align: center">{{ data.message }}</p>
+
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit()">
+    {{ data.submit }}
+  </button>
+  <button mat-button color="warn" (click)="onCancel()" cdkFocusInitial>
+    {{ data.cancel }}
+  </button>
+</div>
