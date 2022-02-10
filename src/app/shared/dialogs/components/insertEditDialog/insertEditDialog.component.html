@@ -17,69 +17,175 @@
   </div>
   <div class="flex flex-wrap w-full h-full">
     <form
-      class="w-full h-full"
+      class="w-full h-full flex flex-wrap justify-around"
       [formGroup]="Form"
       (ngSubmit)="onSubmit()"
       novalidate
+      autocomplete="false"
     >
-      <mat-form-field class="m-3 w-1/3 h-16" appearance="outline">
+      <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
         <mat-label>نام کاربر</mat-label>
-        <input matInput type="text" formControlName="userName" />
+        <input matInput type="text" formControlName="username" />
+        <mat-error
+          *ngIf="
+            Form.get('username')?.invalid &&
+            (Form.get('username')?.touched || Form.get('username')?.dirty)
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
       </mat-form-field>
-      <mat-form-field class="m-3 w-1/3 h-16" appearance="outline">
-        <mat-label>تارخ تولد</mat-label>
-        <input matInput type="text" formControlName="" />
+      <mat-form-field appearance="outline" class="w-3/2 h-16 my-3">
+        <mat-label>تاریخ تولد</mat-label>
+        <input
+          matInput
+          [matDatepicker]="datepicker"
+          formControlName="birthday"
+        />
+        <mat-error
+          *ngIf="
+            Form.get('birthday')?.invalid &&
+            (Form.get('birthday')?.touched || Form.get('birthday')?.dirty)
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="datepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button
+              mat-raised-button
+              class="p-2 rounded bg-green-500 mx-2 text-white"
+              color="primary"
+              matDatepickerApply
+            >
+              تایید
+            </button>
+            <button
+              mat-button
+              matDatepickerCancel
+              class="p-2 rounded bg-orange-500 mx-2 text-white"
+            >
+              بستن
+            </button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
       </mat-form-field>
-      <section class="flex-center h-16 m-3">
+      <section class="flex-center h-16 w-3/2 my-3">
         <label>جنسیت :</label>
-        <mat-radio-group>
-          <mat-radio-button
-            formControlName="gender"
-            color="primary"
-            class="mx-2"
-            value="1"
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button color="primary" class="mx-2" value="1"
             >مرد</mat-radio-button
           >
-          <mat-radio-button
-            formControlName="gender"
-            color="primary"
-            class="mx-2"
-            value="2"
+          <mat-radio-button color="primary" class="mx-2" value="2"
             >زن</mat-radio-button
           >
         </mat-radio-group>
+        <mat-error
+          *ngIf="
+            Form.get('gender')?.invalid &&
+            (Form.get('gender')?.touched || Form.get('gender')?.dirty)
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
       </section>
-      <mat-form-field class="m-3 w-1/3 h-16" appearance="outline">
+      <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
         <mat-label>رمز عبور </mat-label>
-        <input matInput type="text" formControlName="password" />
+        <input
+          matInput
+          type="text"
+          formControlName="password"
+          type="password"
+        />
+        <mat-error
+          *ngIf="
+            Form.get('password')?.invalid &&
+            (Form.get('password')?.touched || Form.get('password')?.dirty)
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
       </mat-form-field>
-      <mat-form-field class="m-3 w-1/3 h-16" appearance="outline">
+      <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
         <mat-label>تکرار رمز عبور </mat-label>
-        <input matInput type="text" formControlName="repeatPassword" />
+        <input
+          matInput
+          type="text"
+          formControlName="repeatPassword"
+          type="password"
+        />
+        <mat-error
+          *ngIf="
+            Form.get('repeatPassword')?.invalid &&
+            (Form.get('repeatPassword')?.touched ||
+              Form.get('repeatPassword')?.dirty)
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
       </mat-form-field>
-      <section class="flex-center m-3 h-16">
+      <section class="flex-center h-16 w-3/2 my-3">
         فعالیت کاربر :
-        <mat-checkbox
-          color="primary"
-          formControlName="userIsActive"
-          class="mx-2"
+        <mat-checkbox color="primary" formControlName="activity" class="mx-2"
           >فعال
         </mat-checkbox>
       </section>
-      <mat-form-field class="m-3 w-5/12 h-16" appearance="outline">
-        <mat-label>استان</mat-label>
-        <input matInput type="text" formControlName="state" />
-      </mat-form-field>
-      <mat-form-field class="m-3 w-5/12 h-16" appearance="outline">
-        <mat-label>شهر</mat-label>
-        <input matInput type="text" formControlName="city" />
-      </mat-form-field>
+      <div class="w-full flex justify-around my-3">
+        <mat-form-field class="w-5/12 h-16" appearance="outline">
+          <mat-label>استان</mat-label>
+          <mat-select
+            formControlName="province"
+            (selectionChange)="getStates(Form.value.province)"
+          >
+            <mat-option [value]="item.name" *ngFor="let item of cities">{{
+              item.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              Form.get('province')?.invalid &&
+              (Form.get('province')?.touched || Form.get('province')?.dirty)
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12 h-16" appearance="outline">
+          <mat-label>شهر</mat-label>
+          <mat-select
+            [disabled]="state.length == 0 && !editMode"
+            formControlName="city"
+          >
+            <mat-option [value]="item.name" *ngFor="let item of state">{{
+              item.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              Form.get('city')?.invalid &&
+              (Form.get('city')?.touched || Form.get('city')?.dirty)
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
     </form>
   </div>
-  <div class="flex justify-between">
+  <div class="flex justify-between my-3">
     <button
+      [disabled]="Form.invalid"
       type="submit"
-      class="p-3 rounded-md bg-green-500 text-white text-lg cursor-pointer"
+      class="p-3 rounded-md text-lg transition-all duration-100"
+      [ngClass]="
+        Form.invalid
+          ? 'bg-gray-200 text-black cursor-not-allowed'
+          : 'bg-green-500 text-white cursor-pointer'
+      "
       (click)="onSubmit()"
     >
       {{ data.submit }}

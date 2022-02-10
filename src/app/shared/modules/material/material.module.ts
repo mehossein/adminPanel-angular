@@ -9,9 +9,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const MODULES = [
   CommonModule,
@@ -21,12 +23,14 @@ const MODULES = [
   MatTableModule,
   MatInputModule,
   MatCommonModule,
-  MatDialogModule,
   MatRadioModule,
+  MatDialogModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatFormFieldModule,
   MatPaginatorModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({

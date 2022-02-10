@@ -1,8 +1,21 @@
+import { User } from './../../../models/User';
 export interface DialogData {
-  userData: any;
+  userdata: any;
   message: string;
   submit: string;
   cancel: string;
-  submitFn?: () => void;
+  submitFn?: (data?: User) => User;
   cancelFn?: () => void;
+}
+
+export interface City {
+  id: number;
+  name: string;
+}
+
+export interface state {
+  id: number;
+  name: string;
+  slug: string;
+  province_id: number;
 }

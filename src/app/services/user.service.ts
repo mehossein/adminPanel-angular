@@ -1,3 +1,4 @@
+import { User } from './../models/User';
 import { Observable } from 'rxjs';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from '../shared/classes/service-base';
@@ -16,6 +17,10 @@ export class UserService extends ServiceBase {
     } else {
       return this.get$('users');
     }
+  }
+
+  createUser(model: User): Observable<any> {
+    return this.post$('users', model);
   }
 
   deleteUser(id: number): Observable<any> {

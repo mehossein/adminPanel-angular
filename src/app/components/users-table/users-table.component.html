@@ -47,15 +47,17 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
-      <td mat-cell *matCellDef="let row">{{ row.id + 1 }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
     </ng-container>
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>نام کاربری</th>
-      <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.username ?? "-" }}</td>
     </ng-container>
     <ng-container matColumnDef="birthday">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</th>
-      <td mat-cell *matCellDef="let row">{{ row.birthday }}</td>
+      <td mat-cell *matCellDef="let row">
+        {{ row.birthday == "" ? "-" : row.birthday }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>جنسیت</th>
@@ -102,17 +104,18 @@
     </ng-container>
     <ng-container matColumnDef="province">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>استان</th>
-      <td mat-cell *matCellDef="let row">{{ row.province }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.province ?? "-" }}</td>
     </ng-container>
     <ng-container matColumnDef="city">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>شهر</th>
-      <td mat-cell *matCellDef="let row">{{ row.city }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.city ?? "-" }}</td>
     </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>عملیات</th>
       <td mat-cell *matCellDef="let row">
         <div class="w-full h-full flex-center">
           <svg
+            (click)="editUserData(row)"
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-orange-500 mx-1 cursor-pointer"
             fill="none"
