@@ -1,10 +1,19 @@
-<p style="text-align: center">{{ data.message }}</p>
+<p style="text-align: center">مطمئنی ی خوای این کاربر رو حذف کنی ؟</p>
 
-<div mat-dialog-actions>
-  <button mat-button color="primary" (click)="onSubmit()">
-    {{ data.submit }}
+<div mat-dialog-actions class="flex justify-between">
+  <button
+    mat-button
+    class="bg-red-500 w-14 flex justify-center p-2 text-white hover:bg-red-600 rounded transform duration-100"
+    (click)="onSubmit()"
+  >
+    بله
   </button>
-  <button mat-button color="warn" (click)="onCancel()" cdkFocusInitial>
-    {{ data.cancel }}
+  <button
+    mat-button
+    class="bg-gray-200 w-14 flex justify-center p-2 hover:bg-gray-300 rounded transform duration-100"
+    (click)="onCancel()"
+    cdkFocusInitial
+  >
+    خیر
   </button>
 </div>

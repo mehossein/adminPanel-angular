@@ -1,11 +1,12 @@
 import { User } from './../../../models/User';
 export interface DialogData {
-  userdata: any;
-  message: string;
+  userdata: User;
   submit: string;
   cancel: string;
-  submitFn?: (data?: User) => User;
+  message: string;
   cancelFn?: () => void;
+  submitFn?: (data?: User) => User;
+  deleteUserFn?: (id: number) => void;
 }
 
 export interface City {

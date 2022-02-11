@@ -8,6 +8,7 @@ import { PaginatorLabels } from 'src/app/services/PaginatorLabels.service';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { alertService } from './../../shared/modules/alert/services/alert.service';
 import { InsertEditDialogComponent } from './../../shared/dialogs/components/insertEditDialog/insertEditDialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/dialogs';
 
 @Component({
   selector: 'app-users-table',
@@ -86,7 +87,7 @@ export class UsersTableComponent implements OnInit {
   }
 
   editUserData(data: User) {
-    const dialog = this.dialog.open(InsertEditDialogComponent, {
+    const editOrInsert = this.dialog.open(InsertEditDialogComponent, {
       width: '1600px',
       data: {
         userdata: data,
@@ -95,10 +96,24 @@ export class UsersTableComponent implements OnInit {
         submit: 'ذخیره اطلاعات',
         submitFn: (data: User) => {
           this.createUser(data);
-          dialog.close();
+          editOrInsert.close();
         },
         cancelFn: () => {
-          dialog.close();
+          editOrInsert.close();
+        },
+        deleteUserFn: (userId: number) => {
+          const confirm = this.dialog.open(ConfirmDialogComponent, {
+            data: {
+              submitFn: () => {
+                this.deleteUser(userId);
+                confirm.close();
+                editOrInsert.close();
+              },
+              cancelFn: () => {
+                confirm.close();
+              },
+            },
+          });
         },
       },
     });

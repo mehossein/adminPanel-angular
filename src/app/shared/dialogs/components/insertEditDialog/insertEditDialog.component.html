@@ -140,7 +140,7 @@
         <mat-form-field class="w-5/12 h-16" appearance="outline">
           <mat-label>شهر</mat-label>
           <mat-select
-            [disabled]="disabledCityInputFunc()"
+            [disabled]="Form.controls.province.status == 'INVALID' && !editMode"
             formControlName="city"
           >
             <mat-option [value]="item.name" *ngFor="let item of city">{{
@@ -175,13 +175,14 @@
     </button>
     <div>
       <button
-        class="p-3 rounded-md border border-black text-lg cursor-pointer"
+        *ngIf="editMode"
+        class="p-3 rounded-md text-lg cursor-pointer ml-3 bg-red-500 text-white"
         (click)="deleteUserOnEditMode(this.data.userdata.id)"
       >
-        {{ data.cancel }}
+        حذف کاربر
       </button>
       <button
-        class="p-3 rounded-md border border-black text-lg cursor-pointer"
+        class="p-3 rounded-md border border-black text-lg cursor-pointer mr-2"
         (click)="onCancel()"
       >
         {{ data.cancel }}

@@ -1,11 +1,15 @@
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../..';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { state } from './../../models/dialog-data.interface';
 import { SharedService } from './../../../services/shared.service';
 import { City, DialogData } from '../../models/dialog-data.interface';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { alertService } from 'src/app/shared/modules/alert/services/alert.service';
-import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-insertEditDialog',
   templateUrl: './insertEditDialog.component.html',
@@ -16,7 +20,7 @@ export class InsertEditDialogComponent implements OnInit {
   city: state[] = [];
   editMode: boolean = false;
   constructor(
-    private readonly _userService: UserService,
+    public dialog: MatDialog,
     private readonly _FB: FormBuilder,
     private readonly _SharedSrv: SharedService,
     private readonly alertService: alertService,
@@ -73,19 +77,17 @@ export class InsertEditDialogComponent implements OnInit {
     });
   }
 
-  disabledCityInputFunc(): boolean {
-    return this.Form.controls.province.status == 'INVALID' && !this.editMode;
-  }
-
   deleteUserOnEditMode(id: number) {
-    this._userService.deleteUser(id).subscribe(
-      () => {
-        this.alertService.showSuccess('کاربر با موفقیت حذف شد');
-        if (typeof this.data.cancelFn == 'function') this.data.cancelFn();
-      },
-      () => {
-        this.alertService.showSuccess('خطایی هنگام حذف کاربر روی داده است ');
-      }
-    );
+    // const dialog = this.dialog.open(ConfirmDialogComponent, {
+    //   data: {
+    //     submitFn: () => {
+    //       dialog.close();
+    //     },
+    //     cancelFn: () => {
+    //       dialog.close();
+    //     },
+    //   },
+    // });
+    if (typeof this.data.deleteUserFn == 'function') this.data.deleteUserFn(id);
   }
 }
