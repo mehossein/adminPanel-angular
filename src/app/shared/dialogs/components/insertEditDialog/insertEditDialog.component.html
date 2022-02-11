@@ -21,7 +21,7 @@
       [formGroup]="Form"
       (ngSubmit)="onSubmit()"
       novalidate
-      autocomplete="false"
+      autocomplete="off"
     >
       <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
         <mat-label>نام کاربر</mat-label>
@@ -41,6 +41,7 @@
           matInput
           [matDatepicker]="datepicker"
           formControlName="birthday"
+          (click)="datepicker.open()"
         />
         <mat-error
           *ngIf="
@@ -54,25 +55,7 @@
           matSuffix
           [for]="datepicker"
         ></mat-datepicker-toggle>
-        <mat-datepicker #datepicker>
-          <mat-datepicker-actions>
-            <button
-              mat-raised-button
-              class="p-2 rounded bg-green-500 mx-2 text-white"
-              color="primary"
-              matDatepickerApply
-            >
-              تایید
-            </button>
-            <button
-              mat-button
-              matDatepickerCancel
-              class="p-2 rounded bg-orange-500 mx-2 text-white"
-            >
-              بستن
-            </button>
-          </mat-datepicker-actions>
-        </mat-datepicker>
+        <mat-datepicker #datepicker> </mat-datepicker>
       </mat-form-field>
       <section class="flex-center h-16 w-3/2 my-3">
         <label>جنسیت :</label>
@@ -141,7 +124,7 @@
             formControlName="province"
             (selectionChange)="getStates(Form.value.province)"
           >
-            <mat-option [value]="item.name" *ngFor="let item of cities">{{
+            <mat-option [value]="item.name" *ngFor="let item of province">{{
               item.name
             }}</mat-option>
           </mat-select>
@@ -157,10 +140,10 @@
         <mat-form-field class="w-5/12 h-16" appearance="outline">
           <mat-label>شهر</mat-label>
           <mat-select
-            [disabled]="state.length == 0 && !editMode"
+            [disabled]="disabledCityInputFunc()"
             formControlName="city"
           >
-            <mat-option [value]="item.name" *ngFor="let item of state">{{
+            <mat-option [value]="item.name" *ngFor="let item of city">{{
               item.name
             }}</mat-option>
           </mat-select>
@@ -190,11 +173,19 @@
     >
       {{ data.submit }}
     </button>
-    <button
-      class="p-3 rounded-md border border-black text-lg cursor-pointer"
-      (click)="onCancel()"
-    >
-      {{ data.cancel }}
-    </button>
+    <div>
+      <button
+        class="p-3 rounded-md border border-black text-lg cursor-pointer"
+        (click)="deleteUserOnEditMode(this.data.userdata.id)"
+      >
+        {{ data.cancel }}
+      </button>
+      <button
+        class="p-3 rounded-md border border-black text-lg cursor-pointer"
+        (click)="onCancel()"
+      >
+        {{ data.cancel }}
+      </button>
+    </div>
   </div>
 </div>

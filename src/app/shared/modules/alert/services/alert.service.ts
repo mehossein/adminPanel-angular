@@ -13,6 +13,12 @@ export class alertService {
       positionClass: 'toast-bottom-center',
     });
   }
+  showWarningFull(msg: string) {
+    this.toastr.warning(msg, '', {
+      timeOut: 4500,
+      positionClass: 'toast-bottom-full-width',
+    });
+  }
 
   showError(msg: string) {
     this.toastr.error(msg, '', {

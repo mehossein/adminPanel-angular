@@ -1,17 +1,6 @@
 {
   "users": [
     {
-      "username": "hossein",
-      "birthday": "",
-      "gender": "1",
-      "password": "hossein",
-      "repeatPassword": "hossein",
-      "activity": true,
-      "province": "زنجان",
-      "city": "زنجان",
-      "id": 1
-    },
-    {
       "username": "ali",
       "birthday": "2022-02-25T20:30:00.000Z",
       "gender": "1",
@@ -32,6 +21,17 @@
       "province": "آذربایجان غربی",
       "city": "اشنویه",
       "id": 3
+    },
+    {
+      "username": "زن",
+      "birthday": "2022-02-27T20:30:00.000Z",
+      "gender": "2",
+      "password": "1234",
+      "repeatPassword": "123",
+      "activity": "",
+      "province": "آذربایجان غربی",
+      "city": "اشنویه",
+      "id": 4
     }
   ],
   "cities": [
