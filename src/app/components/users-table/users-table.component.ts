@@ -1,14 +1,22 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { fromEvent } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ConfirmDialogComponent } from 'src/app/shared/dialogs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PaginatorLabels } from 'src/app/services/PaginatorLabels.service';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { alertService } from './../../shared/modules/alert/services/alert.service';
 import { InsertEditDialogComponent } from './../../shared/dialogs/components/insertEditDialog/insertEditDialog.component';
-import { ConfirmDialogComponent } from 'src/app/shared/dialogs';
 
 @Component({
   selector: 'app-users-table',
@@ -16,7 +24,9 @@ import { ConfirmDialogComponent } from 'src/app/shared/dialogs';
   styleUrls: ['./users-table.component.scss'],
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorLabels }],
 })
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchBox') input!: ElementRef;
+  private searchText?: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<User[]>;
@@ -31,8 +41,16 @@ export class UsersTableComponent implements OnInit {
     this.getUsersList();
   }
 
+  ngAfterViewInit(): void {
+    fromEvent(this.input.nativeElement, 'input')
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe(() => {
+        this.getUsersList(this.searchText);
+      });
+  }
+
   search(searchInput: string) {
-    this.getUsersList(searchInput);
+    this.searchText = searchInput;
   }
 
   private getUsersList(search: string = '') {

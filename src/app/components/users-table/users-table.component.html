@@ -24,9 +24,9 @@
     </div>
     <div class="w-3/12 h-full relative">
       <input
-        #searchInput
-        (keyup)="search(searchInput.value)"
         type="text"
+        #searchBox
+        (input)="search(searchBox.value)"
         class="cursor-pointer w-full h-full rounded pr-8 hover:bg-gray-500 dark:bg-gray-700 bg-gray-400 text-white placeholder:text-white transition-all duration-150"
         placeholder="جست و جو "
       />
