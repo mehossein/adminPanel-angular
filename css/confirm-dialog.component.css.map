@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../src/app/shared/dialogs/components/confirm-dialog/confirm-dialog.component.scss"
-    ],
-    "names": [],
-    "file": "confirm-dialog.component.css"
-}

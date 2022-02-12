@@ -1,5 +1,17 @@
 {
-  "users": [],
+  "users": [
+    {
+      "username": "hossein",
+      "birthday": "2022-02-06T20:30:00.000Z",
+      "gender": "1",
+      "password": "999999",
+      "repeatPassword": "789999",
+      "activity": true,
+      "province": "آذربایجان غربی",
+      "city": "ارومیه",
+      "id": 1
+    }
+  ],
   "cities": [
     {
       "id": 1,

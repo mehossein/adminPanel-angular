@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../src/app/shared/dialogs/components/insertEditDialog/insertEditDialog.component.scss"
-    ],
-    "names": [],
-    "file": "insertEditDialog.component.css"
-}

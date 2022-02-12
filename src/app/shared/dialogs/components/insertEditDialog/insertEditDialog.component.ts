@@ -78,16 +78,6 @@ export class InsertEditDialogComponent implements OnInit {
   }
 
   deleteUserOnEditMode(id: number) {
-    // const dialog = this.dialog.open(ConfirmDialogComponent, {
-    //   data: {
-    //     submitFn: () => {
-    //       dialog.close();
-    //     },
-    //     cancelFn: () => {
-    //       dialog.close();
-    //     },
-    //   },
-    // });
     if (typeof this.data.deleteUserFn == 'function') this.data.deleteUserFn(id);
   }
 }

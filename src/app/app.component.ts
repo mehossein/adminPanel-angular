@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
-import { interval, Observable, Subject, timer } from 'rxjs';
-import { delay, switchMap, takeUntil, repeatWhen } from 'rxjs/operators';
+import { DarkModeService } from './shared/services/darkMode.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(public darkModeService: DarkModeService) {}
+
+  changeTheme() {
+    this.darkModeService.changeStatus();
+  }
+}
