@@ -32,7 +32,7 @@
             (Form.get('username')?.touched || Form.get('username')?.dirty)
           "
         >
-          Please enter a valid email address
+          نام کاربری اجباری است .
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-3/2 h-16 my-3">
@@ -49,7 +49,7 @@
             (Form.get('birthday')?.touched || Form.get('birthday')?.dirty)
           "
         >
-          Please enter a valid email address
+          تاریخ تولد اجباری است .
         </mat-error>
         <mat-datepicker-toggle
           matSuffix
@@ -73,7 +73,7 @@
             (Form.get('gender')?.touched || Form.get('gender')?.dirty)
           "
         >
-          Please enter a valid email address
+          جنسیت کاربر رو مشخص کنید .
         </mat-error>
       </section>
       <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
@@ -90,7 +90,7 @@
             (Form.get('password')?.touched || Form.get('password')?.dirty)
           "
         >
-          Please enter a valid email address
+          رمز عبور الزامی است
         </mat-error>
       </mat-form-field>
       <mat-form-field class="w-3/2 h-16 my-3" appearance="outline">
@@ -108,7 +108,16 @@
               Form.get('repeatPassword')?.dirty)
           "
         >
-          Please enter a valid email address
+          تکرار رمز عبور اجباری است .
+        </mat-error>
+        <mat-error
+          *ngIf="
+            Form.get('repeatPassword')?.invalid &&
+            (Form.get('repeatPassword')?.touched ||
+              Form.get('repeatPassword')?.dirty)
+          "
+        >
+          تکرار رمز عبور اجباری است .
         </mat-error>
       </mat-form-field>
       <section class="flex-center h-16 w-3/2 my-3">
@@ -134,7 +143,7 @@
               (Form.get('province')?.touched || Form.get('province')?.dirty)
             "
           >
-            Please enter a valid email address
+            لطفا استان خود رو انتخاب کنید .
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-5/12 h-16" appearance="outline">
@@ -153,7 +162,7 @@
               (Form.get('city')?.touched || Form.get('city')?.dirty)
             "
           >
-            Please enter a valid email address
+            لطفا شهر خود را انتخاب کنید .
           </mat-error>
         </mat-form-field>
       </div>

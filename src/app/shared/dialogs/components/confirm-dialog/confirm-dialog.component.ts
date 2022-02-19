@@ -14,10 +14,10 @@ export class ConfirmDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
-  onSubmit() {
+  public onSubmit() {
     if (typeof this.data.submitFn == 'function') this.data.submitFn();
   }
-  onCancel() {
+  public onCancel() {
     if (typeof this.data.cancelFn == 'function') this.data.cancelFn();
   }
 }

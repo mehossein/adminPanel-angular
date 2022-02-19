@@ -3,22 +3,22 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../..';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { state } from './../../models/dialog-data.interface';
 import { SharedService } from './../../../services/shared.service';
 import { City, DialogData } from '../../models/dialog-data.interface';
 import { alertService } from 'src/app/shared/modules/alert/services/alert.service';
+
 @Component({
   selector: 'app-insertEditDialog',
   templateUrl: './insertEditDialog.component.html',
   styleUrls: ['./insertEditDialog.component.scss'],
 })
 export class InsertEditDialogComponent implements OnInit {
-  province: City[] = [];
-  city: state[] = [];
-  editMode: boolean = false;
+  public province: City[] = [];
+  public city: state[] = [];
+  public editMode: boolean = false;
   constructor(
     public dialog: MatDialog,
     private readonly _FB: FormBuilder,
@@ -50,34 +50,42 @@ export class InsertEditDialogComponent implements OnInit {
     });
   }
 
-  Form = this._FB.group({
-    username: ['', [Validators.required]],
+  public Form = this._FB.group({
+    username: ['', [Validators.required, Validators.minLength(4)]],
     birthday: ['', [Validators.required]],
     gender: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    repeatPassword: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
     activity: [''],
     province: ['', [Validators.required]],
     city: ['', [Validators.required]],
   });
 
-  onSubmit() {
+  public onSubmit() {
+    if (this.Form.invalid) {
+      this.alertService.showWarning('لطفا فیلد های الزامی را تکمیل کنید .');
+      return;
+    }
+    if (this.Form.value.password != this.Form.value.repeatPassword) {
+      this.alertService.showWarning('رمز عبور با تکرار رمز عبور یکسان نیست .');
+      return;
+    }
     if (typeof this.data.submitFn == 'function')
       this.data.submitFn(this.Form.value);
   }
 
-  onCancel() {
+  public onCancel() {
     if (typeof this.data.cancelFn == 'function') this.data.cancelFn();
   }
 
-  getStates(name: string) {
+  public getStates(name: string) {
     let city = this.province.find((item) => item.name == name);
     this._SharedSrv.getStates(city?.id ?? 0).subscribe((res) => {
       this.city = res;
     });
   }
 
-  deleteUserOnEditMode(id: number) {
+  public deleteUserOnEditMode(id: number) {
     if (typeof this.data.deleteUserFn == 'function') this.data.deleteUserFn(id);
   }
 }

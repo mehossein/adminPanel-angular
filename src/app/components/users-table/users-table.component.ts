@@ -49,7 +49,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
       });
   }
 
-  search(searchInput: string) {
+  public search(searchInput: string) {
     this.searchText = searchInput;
   }
 
@@ -69,7 +69,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onAddUser() {
+  public onAddUser() {
     const dialog = this.dialog.open(InsertEditDialogComponent, {
       width: '1600px',
       data: {
@@ -104,7 +104,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
     );
   }
 
-  editUserData(data: User) {
+  public editUserData(data: User) {
     const editOrInsert = this.dialog.open(InsertEditDialogComponent, {
       width: '1600px',
       data: {
@@ -137,7 +137,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteUser(id: number) {
+  public deleteUser(id: number) {
     if (this.pending) return;
     this.pending = true;
     this._userService.deleteUser(id).subscribe(
@@ -153,7 +153,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
     );
   }
 
-  displayedColumns: string[] = [
+  public displayedColumns: string[] = [
     'id',
     'username',
     'birthday',

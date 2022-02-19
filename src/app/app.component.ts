@@ -9,7 +9,7 @@ import { DarkModeService } from './shared/services/darkMode.service';
 export class AppComponent {
   constructor(public darkModeService: DarkModeService) {}
 
-  changeTheme() {
+  public changeTheme() {
     this.darkModeService.changeStatus();
   }
 }

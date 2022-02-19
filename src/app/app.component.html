@@ -28,6 +28,7 @@
             id="toggleB"
             class="sr-only peer"
             (click)="changeTheme()"
+            [checked]="darkModeService.darkMode"
           />
           <div
             class="transition-all duration-150 block bg-gray-600 dark:bg-white w-10 h-6 rounded-full"
