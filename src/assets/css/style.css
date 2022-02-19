@@ -1,9 +1,18 @@
-﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+﻿@font-face {
+  font-family: "BYekan";
+  src: url("/assets/fonts/Yekan.eot");
+  src: url("/assets/fonts/Yekan.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/Yekan.woff") format("woff"),
+    url("/assets/fonts/Yekan.ttf") format("truetype"),
+    url("/assets/fonts/Yekan.svg#BYekan") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   margin: 0;
   padding: 0;
-  font-family: IRANSans !important;
+  font-family: "BYekan" !important;
 }
 
 body,
